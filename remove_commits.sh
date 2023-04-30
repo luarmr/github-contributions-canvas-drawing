@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Usage: ./remove_old_commits.sh <final_date>
-# Example: ./remove_old_commits.sh 2023-01-31
+# Usage: ./remove_commits.sh <date>
+# Example: ./remove_commits.sh 2023-01-31
 
 if [ $# -ne 1 ]; then
   echo "Usage: $0 <date:2022-04-24>"

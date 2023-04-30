@@ -1,35 +1,42 @@
-# Paint on GitHub contribution panel
-This script creates historical commits to display custom text on your GitHub contribution graph.
+# Customizable GitHub Contributions Graph
+This project allows users to create custom text or display an image on their GitHub contributions graph by generating historical commits. With this tool, you can personalize your GitHub profile in a unique and creative way.
+
+## Features
+- Create custom text or display an image on your GitHub contributions graph
+- Customize commit count range, year, and spacing between letters
+- Dry-run option for testing before execution
+- Easy-to-follow setup and installation
+
+## Prerequisites
+- Node.js
+- Git (and github account)
+- Yarn/npm (optional)
 
 
-## Usage 
-
+## Installation
 
 - Clone this repository:
 
    `git clone git@github.com:luarmr/github-contributions-canvas.git`
 
-- Install dependencies using yarn:
+- Navigate to the project directory:
 
-   `yarn install`
+- `cd custom-github-contributions-graph`
 
-- Create a separate folder, not as a subfolder of this project.
+- Install dependencies using npm or yarn:
+- 
+   `yarn install` or `npm install`
 
-- Initialize a new Git repository in the separate folder:
+## Usage
+- Create a new folder outside of the project directory and initialize a Git repository:
+```
+mkdir my-graph
+cd my-graph
+git init
+```
+- Run the script with the desired options. (Several time if you want to affect diferent groahs per year)
 
-  `git init`
-
-- Create a new repository on GitHub. If you use a private repository, make sure your contribution graph is set to display activity from private repositories.
-
-
-
-- When setting years, use them incrementally.
-
-- The script may return an error if the repository contains older commits. To resolve this issue, you can remove older commits using the 'remove_commits.sh' script.
-
-- You can remove older commits using `remove_commits.sh`
-
-- Follow the instructions provided at the end of the script.
+- Follow the GitHub documentation to create a new repository and connect it to your local repository
 
 ```
 git branch -M main
@@ -37,56 +44,50 @@ git remote add origin git@github.com:<user_name>/<project_name>.git
 git push -u origin main
 ```
 
-## --help
+
+## Options
 
 ```
 ⚡ node <pick_a_path>/app.js --help
 
-Usage: node app.js <text-to-render|dot2pic.com array> [options]
+Usage: node app.js [options, text or image-path is required]
 
 Options:
---help, -h                  Show this help message and exit
---min-commits, -mc <number> Minimum number of commits (default: 1)
---max-commits, -xc <number> Maximum number of commits (default: 40)
---year, -y <number>         Year (default: current year)
---space-between-letters, -s <number> Space between letters (default: 1, valid: 0-7)
---test, -t                  Test mode (default: false)
+  --help, -h                   Show this help message and exit
+  --text, -t <string>          The text that should be render (text or image-path is required)
+  --image-path, -i <string>    Path to an image 7 pixel height 53 width (text or image-path
+                               is required)
+  --min-commits, --mc <number> Minimum number of commits (default: 1)
+  --max-commits, --xc <number> Maximum number of commits (default: 30)
+  --year, -y <number>          Year (default: current year)
+  --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
+  --dry-run                    Test mode (default: false)
 ```
 
 ## Examples
 
-Example, write a message on the year 2012: 
+Create custom text on the GitHub contributions graph for the year 2016:
 ```
-node <pick_a_path>/app.js  "Be Nice" --space-between-letters 2 --year 2012;
-```
-
-Example, write a message on your default profile
-```
-node <pick_a_path>/app.js  "Be Nice" --space-between-letters 2;
+node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --year 2016;
 ```
 
-Example, to preview
+Create custom text on your default GitHub contributions graph:
 ```
-node <pick_a_path>/app.js  "Be Nice" --space-between-letters 2 --text;
-```
-
-If you are a prolific coder, you may need to increase the 'Maximum number of commits' setting. Conversely, if you rarely commit, you can decrease it.
-
-
-## Extra points
-You may notice that the text can also an array from dot2pic.com
-To use this untested functionality you can go to dot2pic.com and create a canvas of 53x7
-It will only support black and white colors
-Use the option "Convert to array"
-Copy from `{` to `}`
-
-
-```
-node <pick_a_path>/app.js  "{0x01,0x01,0x01<this is a long string>0x01,0x01,0x01}" --space-between-letters 2;
+node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2;
 ```
 
-I have no affiliation or even know the developer of dot2pic. I implement this part just because.
+Preview the custom text without making actual commits:
+```
+node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --dry-run;
+```
 
+Use an image to create a custom GitHub contributions graph:
+```
+node <pick_a_path>/app.js  -i "/path/to/image.png";
+```
 
+# Remove commits (remove_commits.sh)
 
+This script helps you remove commits after a specified date. This is useful when you've created commits in the wrong order, want to add content to your GitHub contributions graph for a previous year, or wish to modify your default graph without affecting overlapping dates.
 
+`./remove_commits.sh 2023-01-31` 
