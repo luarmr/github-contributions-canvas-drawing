@@ -86,7 +86,23 @@ Use an image to create a custom GitHub contributions graph:
 node <pick_a_path>/app.js  -i "/path/to/image.png";
 ```
 
-# Remove commits (remove_commits.sh)
+## Some results
+
+### From Image
+
+![Console execution of: node ../github-contributions-canvas/app.js -i ../github-contributions-canvas/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_image.png?raw=true)
+
+![Result of the execution with image](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_image.png?raw=true)
+
+### From text
+
+![Console execution of: node ../github-contributions-canvas/app.js -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_text_be_kind.png?raw=true)
+
+![Result of the execution from text](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_text_be_kind.png?raw=true)
+
+
+
+## Remove commits (remove_commits.sh)
 
 This script helps you remove commits after a specified date. This is useful when you've created commits in the wrong order, want to add content to your GitHub contributions graph for a previous year, or wish to modify your default graph without affecting overlapping dates.
 
