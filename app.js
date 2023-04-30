@@ -60,7 +60,6 @@ Options:
   const maxCommits = args['max-commits']
   const spaceBetweenLetters = args['space-between-letters']
   const test = args['dry-run']
-  console.log(args)
 
   return {
     text,
@@ -84,7 +83,7 @@ const {
   spaceBetweenLetters,
   test
 } = parseArgs()
-console.log(maxCommits)
+
 const main = async () => {
   const canvasMatrix = text
     ? canvas.processTextToCanvas(text, spaceBetweenLetters)
