@@ -55,7 +55,7 @@ Options:
 
   const year = args.year
   const initialDate = year ? getFirstSundayOfYear(year) : firstSundayDaysAgo(365)
-  const endDate = year ? new Date(year, 11, 31) : new Date()
+  const endDate = year ? new Date(year, 11, 31, 1, 0, 0) : new Date()
   const minCommits = args['min-commits']
   const maxCommits = args['max-commits']
   const spaceBetweenLetters = args['space-between-letters']
