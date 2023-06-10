@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsdom": "^22.1.0",
     "minimist": "^1.2.8",
     "progress": "^2.0.3",
     "sharp": "^0.32.1",

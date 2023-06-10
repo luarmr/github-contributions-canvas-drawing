@@ -1,6 +1,8 @@
 const minimist = require('minimist')
 const ProgressBar = require('progress')
 
+const fetchContributions = require('./contributions')
+
 const {
   numberWeeks,
   fillSpace
@@ -28,6 +30,7 @@ const parseArgs = () => {
       xc: 'max-commits',
       y: 'year',
       s: 'space-between-letters',
+      u: 'user',
       h: 'help'
     }
   })
@@ -48,6 +51,7 @@ Options:
   --max-commits, --xc <number> Maximum number of commits (default: 30)
   --year, -y <number>          Year (default: current year)
   --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
+  --user, -u <string>          GitHub username to check for existing contributions
   --dry-run                    Test mode (default: false)`
     )
     process.exit(args.help ? 0 : 1)
@@ -59,6 +63,7 @@ Options:
   const minCommits = args['min-commits']
   const maxCommits = args['max-commits']
   const spaceBetweenLetters = args['space-between-letters']
+  const user = args.user
   const test = args['dry-run']
 
   return {
@@ -69,7 +74,8 @@ Options:
     spaceBetweenLetters,
     test,
     initialDate,
-    endDate
+    endDate,
+    user
   }
 }
 
@@ -80,6 +86,7 @@ const {
   maxCommits,
   initialDate,
   endDate,
+  user,
   spaceBetweenLetters,
   test
 } = parseArgs()
@@ -108,10 +115,25 @@ const main = async () => {
   if (isCommitBeforeDate(initialDate)) {
     throw new Error(`I am sorry, you need to remove the commits after ${formatDate(initialDate)} you can use the sh tool in this repo`)
   }
+
+  let existingContributions = {}
+
+  if (user) {
+    const initialYear = initialDate.getFullYear()
+    const finalYear = endDate.getFullYear()
+    existingContributions = await fetchContributions(user, initialYear)
+    if (initialYear !== finalYear) {
+      const moreContributions = await fetchContributions(user, finalYear)
+      existingContributions = { ...existingContributions, ...moreContributions }
+    }
+  }
+
   const iterationDate = new Date(initialDate.getTime())
   for (let i = 0; i < flatCanvas.length; i++) {
     if (iterationDate <= endDate) {
-      createEmptyCommits(iterationDate, flatCanvas[i] === fillSpace ? maxCommits : minCommits)
+      const numCommits = flatCanvas[i] === fillSpace ? maxCommits : minCommits
+      const contributions = existingContributions[iterationDate] || 0
+      createEmptyCommits(iterationDate, numCommits - contributions)
       iterationDate.setDate(iterationDate.getDate() + 1)
       progressBar.tick()
     }
