@@ -40,7 +40,7 @@ const parseArgs = () => {
   const noInputProvided = !text && !imagePath
   if (args.help || noInputProvided) {
     console.log(`
-Usage: node app.js [options]
+Usage: node app.js [options, text or image-path is required]
 
 Options:
   --help, -h                   Show this help message and exit
