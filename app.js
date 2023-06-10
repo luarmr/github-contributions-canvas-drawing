@@ -51,7 +51,7 @@ const parseArgs = () => {
     --max-commits, --xc <number> Maximum number of commits (default: 30)
     --year, -y <number>          Year (default: current year)
     --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
-    --user, -u <string>          GitHub username to check for existing contributions
+  --user, -u <string>          GitHub username to check for existing contributions (in beta)
     --dry-run                    Test mode (default: false)`
     )
     process.exit(args.help ? 0 : 1)
@@ -59,7 +59,7 @@ const parseArgs = () => {
 
   const year = args.year
   const initialDate = year ? getFirstSundayOfYear(year) : firstSundayDaysAgo(365)
-  const endDate = year ? new Date(year, 11, 31, 1, 0, 0) : new Date()
+  const endDate = year ? new Date(year, 11, 31, 12, 0, 0) : new Date()
   const minCommits = args['min-commits']
   const maxCommits = args['max-commits']
   const spaceBetweenLetters = args['space-between-letters']
@@ -119,6 +119,7 @@ const main = async () => {
   let existingContributions = {}
 
   if (user) {
+    console.warn('Parameter "user" is set. Note that commits made in other repositories will be accounted for in their contribution graph to calculate the number of commit that has to be created. This is in BETA since I am not sure how to account for the default timezone in github')
     const initialYear = initialDate.getFullYear()
     const finalYear = endDate.getFullYear()
     existingContributions = await fetchContributions(user, initialYear)

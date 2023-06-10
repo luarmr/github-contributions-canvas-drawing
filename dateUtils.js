@@ -2,7 +2,7 @@ const getFirstSundayOfYear = (year) => {
   const firstDay = new Date(year, 0, 1)
   const dayOfWeek = firstDay.getDay()
   const daysToAdd = dayOfWeek === 0 ? 0 : (7 - dayOfWeek)
-  return new Date(year, 0, 1 + daysToAdd, 1, 0, 0)
+  return new Date(year, 0, 1 + daysToAdd, 12, 0, 0)
 }
 
 const firstSundayDaysAgo = (daysAgo) => {

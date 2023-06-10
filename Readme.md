@@ -61,7 +61,7 @@ Options:
   --max-commits, --xc <number> Maximum number of commits (default: 30)
   --year, -y <number>          Year (default: current year)
   --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
-  --user, -u <string>          GitHub username to check for existing contributions
+  --user, -u <string>          GitHub username to check for existing contributions (in beta)
   --dry-run                    Test mode (default: false)
 
 ```
@@ -76,6 +76,7 @@ node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --year 2016;
 Create custom text on the GitHub contributions graph for the year 2016, but this time the tool will account for any existing contributions you may have:
 ```
 node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
+# Notice that the contrib graph is timezone aware. So this may produce unexpected results. 
 ```
 
 Create custom text on your default GitHub contributions graph:
