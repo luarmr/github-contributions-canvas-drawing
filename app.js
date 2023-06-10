@@ -40,19 +40,19 @@ const parseArgs = () => {
   const noInputProvided = !text && !imagePath
   if (args.help || noInputProvided) {
     console.log(`
-Usage: node app.js [options, text or image-path is required]
-
-Options:
-  --help, -h                   Show this help message and exit
-  --text, -t <string>          The text that should be render (text or image-path is required)
-  --image-path, -i <string>    Path to an image 7 pixel height 53 width (text or image-path
-                               is required)
-  --min-commits, --mc <number> Minimum number of commits (default: 1)
-  --max-commits, --xc <number> Maximum number of commits (default: 30)
-  --year, -y <number>          Year (default: current year)
-  --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
-  --user, -u <string>          GitHub username to check for existing contributions
-  --dry-run                    Test mode (default: false)`
+  Usage: node app.js [options, text or image-path is required]
+  
+  Options:
+    --help, -h                   Show this help message and exit
+    --text, -t <string>          The text that should be render (text or image-path is required)
+    --image-path, -i <string>    Path to an image 7 pixel height 53 width (text or image-path
+                                 is required)
+    --min-commits, --mc <number> Minimum number of commits (default: 1)
+    --max-commits, --xc <number> Maximum number of commits (default: 30)
+    --year, -y <number>          Year (default: current year)
+    --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
+    --user, -u <string>          GitHub username to check for existing contributions
+    --dry-run                    Test mode (default: false)`
     )
     process.exit(args.help ? 0 : 1)
   }
@@ -112,7 +112,7 @@ const main = async () => {
     incomplete: ' '
   })
 
-  if (isCommitBeforeDate(initialDate)) {
+  if (await isCommitBeforeDate(initialDate)) {
     throw new Error(`I am sorry, you need to remove the commits after ${formatDate(initialDate)} you can use the sh tool in this repo`)
   }
 
@@ -135,22 +135,24 @@ const main = async () => {
       const existingContributionsCount = existingContributions[formatDate(iterationDate)] || 0
       const numCommits = numCommitsNeeded - existingContributionsCount
       if (numCommits > 0) {
-        createEmptyCommits(iterationDate, numCommits)
+        await createEmptyCommits(iterationDate, numCommits)
       }
-      iterationDate.setDate(iterationDate.getDate() + 1)
-      progressBar.tick()
     }
+    progressBar.tick()
+    iterationDate.setDate(iterationDate.getDate() + 1)
   }
   progressBar.terminate()
 
   console.log(`
-Now you can push this to GitHub. Assuming you project is empty you can do:
-git branch -M main
-git remote add origin git@github.com:<user_name>/<project_name>.git
-git push -u origin main
-
-HAVE FUN! BE KIND!`
+  Now you can push this to GitHub. Assuming you project is empty you can do:
+  git branch -M main
+  git remote add origin git@github.com:<user_name>/<project_name>.git
+  git push -u origin main
+  
+  HAVE FUN! BE KIND!`
   )
 }
 
 main()
+  .catch(error => console.error(error))
+  .finally(process.exit)

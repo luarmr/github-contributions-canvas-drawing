@@ -15,7 +15,7 @@ async function fetchContributions (username, year) {
       const count = parseInt(day.textContent.split(' ')[0])
       contributions[date] = isNaN(count) ? 0 : count
     })
-
+    dom.window.close()
     return contributions
   } catch (error) {
     console.warn('Youe current contributions can not be retrieve')
