@@ -131,9 +131,12 @@ const main = async () => {
   const iterationDate = new Date(initialDate.getTime())
   for (let i = 0; i < flatCanvas.length; i++) {
     if (iterationDate <= endDate) {
-      const numCommits = flatCanvas[i] === fillSpace ? maxCommits : minCommits
-      const contributions = existingContributions[iterationDate] || 0
-      createEmptyCommits(iterationDate, numCommits - contributions)
+      const numCommitsNeeded = flatCanvas[i] === fillSpace ? maxCommits : minCommits
+      const existingContributionsCount = existingContributions[formatDate(iterationDate)] || 0
+      const numCommits = numCommitsNeeded - existingContributionsCount
+      if (numCommits > 0) {
+        createEmptyCommits(iterationDate, numCommits)
+      }
       iterationDate.setDate(iterationDate.getDate() + 1)
       progressBar.tick()
     }
