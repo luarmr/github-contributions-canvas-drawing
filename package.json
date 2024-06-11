@@ -2,7 +2,10 @@
   "name": "github-contributions-canvas",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
+  "bin": {
+    "github-contributions-canvas": "./bin/cli.js"
+  },
   "scripts": {
     "lint": "eslint *.js",
     "lint:fix": "yarn run lint -- --fix"

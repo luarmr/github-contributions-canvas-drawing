@@ -1,10 +1,10 @@
 const minimist = require('minimist')
 const ProgressBar = require('progress')
-const fetchContributions = require('./contributions')
-const { numberWeeks, fillSpace } = require('./constants')
-const { getFirstSundayOfYear, formatDate, firstSundayDaysAgo } = require('./dateUtils')
-const canvas = require('./canvas')
-const { removeOldCommits, isCommitBeforeDate, createEmptyCommits } = require('./gitUtils')
+const fetchContributions = require('./utils/contributions')
+const { numberWeeks, fillSpace } = require('./utils/constants')
+const { getFirstSundayOfYear, formatDate, firstSundayDaysAgo } = require('./utils/dateUtils')
+const canvas = require('./utils/canvas')
+const { removeOldCommits, isCommitBeforeDate, createEmptyCommits } = require('./utils/gitUtils')
 
 const parseArgs = () => {
   const args = minimist(process.argv.slice(2), {
@@ -38,18 +38,17 @@ const parseArgs = () => {
     console.log(`
   Usage: node app.js [options, text or image-path is required]
 
-  Options:
-    --help, -h                   Show this help message and exit
-    --text, -t <string>          The text that should be render (text or image-path is required)
-    --image-path, -i <string>    Path to an image 7 pixel height 53 width (text or image-path
-                                 is required)
-    --min-commits, --mc <number> Minimum number of commits (default: 1)
-    --max-commits, --xc <number> Maximum number of commits (default: 30)
-    --year, -y <number>          Year (default: current year)
-    --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
-    --user, -u <string>          GitHub username to check for existing contributions (in beta)
-    --dry-run                    Test mode (default: false)
-    --force, -f                  Force remove commits older than the initial date
+Options:
+  --help, -h                   Show this help message and exit
+  --text, -t <string>          The text that should be rendered (text or image-path is required)
+  --image-path, -i <string>    Path to an image (7 pixels height, 53 pixels width) (text or image-path is required)
+  --min-commits, --mc <number> Minimum number of commits (default: 1)
+  --max-commits, --xc <number> Maximum number of commits (default: 30)
+  --year, -y <number>          Year (default: current year)
+  --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
+  --user, -u <string>          GitHub username to check for existing contributions (in beta)
+  --dry-run                    Test mode (default: false)
+  --force, -f                  Force remove commits older than the initial date
   `)
     process.exit(args.help ? 0 : 1)
   }
@@ -150,7 +149,6 @@ const main = async () => {
     console.log(`
     Now you can push this to GitHub. Assuming your project is empty, you can do:
     git branch -M main
-    git remote add origin git@github.com:<user_name>/<project_name>.git
     git remote add origin git@github.com:<user_name>/<project_name>.git
     git push -u origin main
     
