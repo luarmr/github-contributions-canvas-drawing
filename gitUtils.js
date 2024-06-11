@@ -20,7 +20,28 @@ const createEmptyCommits = async (date, repetitions) => {
   }
 }
 
+const removeOldCommits = async (finalDate) => {
+  try {
+    const commitAfterFinalDate = await shell
+      .exec(`git log --before="${finalDate}" -1 --pretty=format:"%H"`, { silent: true })
+      .stdout.trim()
+    if (!commitAfterFinalDate) {
+      throw new Error('No commits found after the specified date.')
+    }
+
+    const numberOfCommits = await shell
+      .exec(`git rev-list --count "${commitAfterFinalDate}..HEAD"`, { silent: true })
+      .stdout.trim()
+    await shell.exec(`git reset --hard "HEAD~${numberOfCommits}"`, { silent: true })
+
+    return 'Commits older than the specified date have been removed.'
+  } catch (error) {
+    throw new Error(`Failed to remove commits: ${error.message}`)
+  }
+}
+
 module.exports = {
   isCommitBeforeDate,
-  createEmptyCommits
+  createEmptyCommits,
+  removeOldCommits
 }
