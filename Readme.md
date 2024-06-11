@@ -21,7 +21,7 @@ This project allows users to create custom text or display an image on their Git
 
 - Navigate to the project directory:
 
-   `cd custom-github-contributions-graph`
+   `cd github-contributions-canvas`
 
 - Install dependencies using npm or yarn:
 
@@ -44,14 +44,14 @@ This project allows users to create custom text or display an image on their Git
 
 ## Options
 ```sh
-⚡ node <pick_a_path>/app.js --help
+⚡ npx github-contributions-canvas --help
 
-Usage: node app.js [options, text or image-path is required]
+Usage: npx github-contributions-canvas [options, text or image-path is required]
 
 Options:
   --help, -h                   Show this help message and exit
   --text, -t <string>          The text that should be rendered (text or image-path is required)
-  --image-path, -i <string>    Path to an image 7 pixels height 53 pixels width (text or image-path is required)
+  --image-path, -i <string>    Path to an image (7 pixels height, 53 pixels width) (text or image-path is required)
   --min-commits, --mc <number> Minimum number of commits (default: 1)
   --max-commits, --xc <number> Maximum number of commits (default: 30)
   --year, -y <number>          Year (default: current year)
@@ -65,39 +65,39 @@ Options:
 
 Create custom text on the GitHub contributions graph for the year 2016. This command doesn't account for any existing contributions you may have:
 ```sh
-node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --year 2016;
+npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --year 2016;
 ```
 
 Create custom text on the GitHub contributions graph for the year 2016, but this time the tool will account for any existing contributions you may have:
 ```sh
-node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
+npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
 # Notice that the contrib graph is timezone aware. So this may produce unexpected results. 
 ```
 
 Create custom text on your default GitHub contributions graph:
 ```sh
-node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2;
+npx github-contributions-canvas -t "Be Nice" --space-between-letters 2;
 ```
 
 Preview the custom text without making actual commits:
 ```sh
-node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --dry-run;
+npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --dry-run;
 ```
 
 Use an image to create a custom GitHub contributions graph:
 ```sh
-node <pick_a_path>/app.js -i "/path/to/image.png";
+npx github-contributions-canvas -i "/path/to/image.png";
 ```
 
 ## Some Results
 
 ### From Image
-![Console execution of: node ../github-contributions-canvas/app.js -i ../github-contributions-canvas/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_image.png?raw=true)
+![Console execution of: npx github-contributions-canvas -i ../github-contributions-canvas/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_image.png?raw=true)
 
 ![Result of the execution with image](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_image.png?raw=true)
 
 ### From Text
-![Console execution of: node ../github-contributions-canvas/app.js -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_text_be_kind.png?raw=true)
+![Console execution of: npx github-contributions-canvas -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_text_be_kind.png?raw=true)
 
 ![Result of the execution from text](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_text_be_kind.png?raw=true)
 
@@ -108,6 +108,3 @@ node <pick_a_path>/app.js -i "/path/to/image.png";
 
 ## License
 ISC
-```
-
-You can copy and paste the above content directly into your `Readme.md` file. If you need any further adjustments, please let me know!
