@@ -1,4 +1,5 @@
 # Customizable GitHub Contributions Graph
+
 This project allows users to create custom text or display an image on their GitHub contributions graph by generating historical commits. With this tool, you can personalize your GitHub profile in a unique and creative way.
 
 ## Features
@@ -9,9 +10,8 @@ This project allows users to create custom text or display an image on their Git
 
 ## Prerequisites
 - Node.js
-- Git (and github account)
+- Git (and GitHub account)
 - Yarn/npm (optional)
-
 
 ## Installation
 
@@ -21,97 +21,93 @@ This project allows users to create custom text or display an image on their Git
 
 - Navigate to the project directory:
 
-- `cd custom-github-contributions-graph`
+   `cd custom-github-contributions-graph`
 
 - Install dependencies using npm or yarn:
-- 
+
    `yarn install` or `npm install`
 
 ## Usage
 - Create a new folder outside of the project directory and initialize a Git repository:
-```
-mkdir my-graph
-cd my-graph
-git init
-```
-- Run the script with the desired options. (Several time if you want to affect diferent groahs per year)
-
-- Follow the GitHub documentation to create a new repository and connect it to your local repository
-
-```
-git branch -M main
-git remote add origin git@github.com:<user_name>/<project_name>.git
-git push -u origin main
-```
-
+  ```sh
+  mkdir my-graph
+  cd my-graph
+  git init
+  ```
+- Run the script with the desired options. (Several times if you want to affect different graphs per year)
+- Follow the GitHub documentation to create a new repository and connect it to your local repository:
+  ```sh
+  git branch -M main
+  git remote add origin git@github.com:<user_name>/<project_name>.git
+  git push -u origin main
+  ```
 
 ## Options
-
-```
+```sh
 ⚡ node <pick_a_path>/app.js --help
 
 Usage: node app.js [options, text or image-path is required]
 
 Options:
   --help, -h                   Show this help message and exit
-  --text, -t <string>          The text that should be render (text or image-path is required)
-  --image-path, -i <string>    Path to an image 7 pixel height 53 width (text or image-path
-                               is required)
+  --text, -t <string>          The text that should be rendered (text or image-path is required)
+  --image-path, -i <string>    Path to an image 7 pixels height 53 pixels width (text or image-path is required)
   --min-commits, --mc <number> Minimum number of commits (default: 1)
   --max-commits, --xc <number> Maximum number of commits (default: 30)
   --year, -y <number>          Year (default: current year)
   --space-between-letters, -s  <number> Space between letters (default: 1, valid: 0-7)
   --user, -u <string>          GitHub username to check for existing contributions (in beta)
   --dry-run                    Test mode (default: false)
-
+  --force, -f                  Force remove commits older than the initial date
 ```
 
 ## Examples
 
 Create custom text on the GitHub contributions graph for the year 2016. This command doesn't account for any existing contributions you may have:
-```
-node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --year 2016;
+```sh
+node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --year 2016;
 ```
 
 Create custom text on the GitHub contributions graph for the year 2016, but this time the tool will account for any existing contributions you may have:
-```
-node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
+```sh
+node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
 # Notice that the contrib graph is timezone aware. So this may produce unexpected results. 
 ```
 
 Create custom text on your default GitHub contributions graph:
-```
-node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2;
+```sh
+node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2;
 ```
 
 Preview the custom text without making actual commits:
-```
-node <pick_a_path>/app.js  -t "Be Nice" --space-between-letters 2 --dry-run;
+```sh
+node <pick_a_path>/app.js -t "Be Nice" --space-between-letters 2 --dry-run;
 ```
 
 Use an image to create a custom GitHub contributions graph:
-```
-node <pick_a_path>/app.js  -i "/path/to/image.png";
+```sh
+node <pick_a_path>/app.js -i "/path/to/image.png";
 ```
 
-## Some results
+## Some Results
 
 ### From Image
-
 ![Console execution of: node ../github-contributions-canvas/app.js -i ../github-contributions-canvas/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_image.png?raw=true)
 
 ![Result of the execution with image](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_image.png?raw=true)
 
-### From text
-
+### From Text
 ![Console execution of: node ../github-contributions-canvas/app.js -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_text_be_kind.png?raw=true)
 
 ![Result of the execution from text](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_text_be_kind.png?raw=true)
 
+## Notes
+- Ensure your repository is initialized with `git init` before running the script.
+- Use the `--dry-run` option to preview the changes without making any commits.
+- The `--user` option is in beta and may not account for all time zones correctly.
 
+## License
+ISC
+```
 
-## Remove commits (remove_commits.sh)
-
-This script helps you remove commits after a specified date. This is useful when you've created commits in the wrong order, want to add content to your GitHub contributions graph for a previous year, or wish to modify your default graph without affecting overlapping dates.
-
-`./remove_commits.sh 2023-01-31` 
+You can copy and paste the above content directly into your `Readme.md` file. If you need any further adjustments, please let me know!
