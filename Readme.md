@@ -2,6 +2,9 @@
 
 This project allows users to create custom text or display an image on their GitHub contributions graph by generating historical commits. With this tool, you can personalize your GitHub profile in a unique and creative way.
 
+[![npm version](https://img.shields.io/npm/v/github-contributions-canvas-drawing.svg)](https://www.npmjs.com/package/github-contributions-canvas-drawing)
+![npx-executable](https://img.shields.io/badge/npx-executable-blue.svg)
+
 ## Features
 - Create custom text or display an image on your GitHub contributions graph
 - Customize commit count range, year, and spacing between letters
@@ -13,7 +16,7 @@ This project allows users to create custom text or display an image on their Git
 - Git (and GitHub account)
 - Yarn/npm (optional)
 
-## Installation
+## Local Installation
 
 - Clone this repository:
 
@@ -26,6 +29,14 @@ This project allows users to create custom text or display an image on their Git
 - Install dependencies using npm or yarn:
 
    `yarn install` or `npm install`
+
+## Using npx
+
+To run the project using npx, you might want to add the complete command or purpose. Here's an example assuming you're running a script from the project:
+
+```shell
+npx github-contributions-canvas-drawing --help
+```
 
 ## Usage
 - Create a new folder outside of the project directory and initialize a Git repository:
