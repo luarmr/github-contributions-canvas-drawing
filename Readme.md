@@ -17,11 +17,11 @@ This project allows users to create custom text or display an image on their Git
 
 - Clone this repository:
 
-   `git clone git@github.com:luarmr/github-contributions-canvas.git`
+   `git clone git@github.com:luarmr/github-contributions-canvas-drawing.git`
 
 - Navigate to the project directory:
 
-   `cd github-contributions-canvas`
+   `cd github-contributions-canvas-drawing`
 
 - Install dependencies using npm or yarn:
 
@@ -44,9 +44,9 @@ This project allows users to create custom text or display an image on their Git
 
 ## Options
 ```sh
-⚡ npx github-contributions-canvas --help
+⚡ npx github-contributions-canvas-drawing --help
 
-Usage: npx github-contributions-canvas [options, text or image-path is required]
+Usage: npx github-contributions-canvas-drawing [options, text or image-path is required]
 
 Options:
   --help, -h                   Show this help message and exit
@@ -65,41 +65,41 @@ Options:
 
 Create custom text on the GitHub contributions graph for the year 2016. This command doesn't account for any existing contributions you may have:
 ```sh
-npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --year 2016;
+npx github-contributions-canvas-drawing -t "Be Nice" --space-between-letters 2 --year 2016;
 ```
 
 Create custom text on the GitHub contributions graph for the year 2016, but this time the tool will account for any existing contributions you may have:
 ```sh
-npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
+npx github-contributions-canvas-drawing -t "Be Nice" --space-between-letters 2 --year 2016 --user luarmr;
 # Notice that the contrib graph is timezone aware. So this may produce unexpected results. 
 ```
 
 Create custom text on your default GitHub contributions graph:
 ```sh
-npx github-contributions-canvas -t "Be Nice" --space-between-letters 2;
+npx github-contributions-canvas-drawing -t "Be Nice" --space-between-letters 2;
 ```
 
 Preview the custom text without making actual commits:
 ```sh
-npx github-contributions-canvas -t "Be Nice" --space-between-letters 2 --dry-run;
+npx github-contributions-canvas-drawing -t "Be Nice" --space-between-letters 2 --dry-run;
 ```
 
 Use an image to create a custom GitHub contributions graph:
 ```sh
-npx github-contributions-canvas -i "/path/to/image.png";
+npx github-contributions-canvas-drawing -i "/path/to/image.png";
 ```
 
 ## Some Results
 
 ### From Image
-![Console execution of: npx github-contributions-canvas -i ../github-contributions-canvas/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_image.png?raw=true)
+![Console execution of: npx github-contributions-canvas-drawing -i ../github-contributions-canvas-drawing/assets/example.png -s2  --xc 4 -y 2011](https://github.com/luarmr/github-contributions-canvas-drawing/blob/main/assets/console_from_image.png?raw=true)
 
-![Result of the execution with image](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_image.png?raw=true)
+![Result of the execution with image](https://github.com/luarmr/github-contributions-canvas-drawing/blob/main/assets/github_from_image.png?raw=true)
 
 ### From Text
-![Console execution of: npx github-contributions-canvas -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/console_from_text_be_kind.png?raw=true)
+![Console execution of: npx github-contributions-canvas-drawing -t "be kind" -s1 -y 2013](https://github.com/luarmr/github-contributions-canvas-drawing/blob/main/assets/console_from_text_be_kind.png?raw=true)
 
-![Result of the execution from text](https://github.com/luarmr/github-contributions-canvas/blob/main/assets/github_from_text_be_kind.png?raw=true)
+![Result of the execution from text](https://github.com/luarmr/github-contributions-canvas-drawing/blob/main/assets/github_from_text_be_kind.png?raw=true)
 
 ## Notes
 - Ensure your repository is initialized with `git init` before running the script.

@@ -1,10 +1,14 @@
 {
-  "name": "github-contributions-canvas",
+  "name": "github-contributions-canvas-drawing",
   "version": "1.0.0",
   "description": "Create custom text or display an image on your GitHub contributions graph by generating historical commits.",
   "main": "src/app.js",
   "bin": {
-    "github-contributions-canvas": "bin/cli.js"
+    "github-contributions-canvas-drawing": "bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luarmr/github-contributions-canvas-drawing.git"
   },
   "scripts": {
     "lint": "eslint src/**/*.js",
@@ -18,8 +22,11 @@
     "commits",
     "fun"
   ],
-  "author": "",
+  "author": "Raul Martin <luarmr@gmail.com>",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luarmr/github-contributions-canvas-drawing/issues"
+  },
   "dependencies": {
     "jsdom": "^22.1.0",
     "minimist": "^1.2.8",
@@ -27,6 +34,7 @@
     "sharp": "^0.32.1",
     "shelljs": "^0.8.5"
   },
+  "homepage": "https://github.com/luarmr/github-contributions-canvas-drawing#readme",
   "devDependencies": {
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",
