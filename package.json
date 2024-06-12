@@ -4,13 +4,20 @@
   "description": "Create custom text or display an image on your GitHub contributions graph by generating historical commits.",
   "main": "src/app.js",
   "bin": {
-    "github-contributions-canvas": "./bin/cli.js"
+    "github-contributions-canvas": "bin/cli.js"
   },
   "scripts": {
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint --fix src/**/*.js"
   },
-  "keywords": ["GitHub", "contributions", "graph", "custom", "commits", "fun"],
+  "keywords": [
+    "GitHub",
+    "contributions",
+    "graph",
+    "custom",
+    "commits",
+    "fun"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
