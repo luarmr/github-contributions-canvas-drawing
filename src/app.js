@@ -92,10 +92,12 @@ const {
 
 const main = async () => {
   try {
-    if (force) {
-      console.log(await removeOldCommits(formatDate(initialDate)))
-    } else if (await isCommitBeforeDate(initialDate)) {
-      throw new Error(`I am sorry, you need to remove the commits after ${formatDate(initialDate)}. You can use the --force parameter to do this automatically.`)
+    if (await isCommitBeforeDate(initialDate)) {
+      if (force) {
+        console.log(await removeOldCommits(formatDate(initialDate)))
+      } else {
+        throw new Error(`I am sorry, you need to remove the commits after ${formatDate(initialDate)}. You can use the --force parameter to do this automatically.`)
+      }
     }
 
     const canvasMatrix = text
